@@ -1,20 +1,21 @@
 import java.util.Scanner;
+import java.text.DecimalFormat;
 
 public class CurrencyCalc {
 
+    private static final DecimalFormat df = new DecimalFormat("0.00");
 
  public static void main (String[] args ){
         Scanner input = new Scanner(System.in);
         String welcomeMessage = "Welcome to the currency calculator. Please type the type of currency that you would like to convert (dollars, euros, pounds).";
         String type1confirmation;
-        String type2confirmation;
         String finalMessage;
-        String currencyType1;
+        String currencyType1 = "";
         String currencyType2;
         boolean currency1valid = false;
         boolean value1valid = false;
         boolean currency2valid = false;
-        double value1;
+        double value1 = 0.0;
         double finalValue;
 
         System.out.println(welcomeMessage);
@@ -38,57 +39,64 @@ public class CurrencyCalc {
             System.out.println(type1confirmation);
         }
         }
+
         while(value1valid == false){
             String valueString = input.nextLine();
-            if(valueString.isNumeric()){
-                //check for how to do isnumeric
-                //cast to double
+            try{
+                value1 = Double.parseDouble(valueString);
                 value1valid = true;
-            } else {
-                
+                System.out.println("What would you like to convert your " + value1 + " " + currencyType1 + " to? (dollars, euros, pounds)");
+            } catch (NumberFormatException e) {
+                value1valid = false;
+                System.out.println("This is not a number. Please try again.");
             }
         }
 
         while(currency2valid == false){
             currencyType2 = input.nextLine();
         if(currencyType1.equals("dollars") && currencyType2.equals("dollars")){
-            //calculation here
-            //round to proper format
-            finalMessage = "You selected to convert from dollars to dollars. The conversion of " + currencyType1 + " to " + currencyType2 + " is: " + finalValue;
+            finalValue = value1;
+            finalMessage = "You selected to convert from dollars to dollars. The conversion of " + value1 + " " + currencyType1 + " to " + currencyType2 + " is approximately: " + df.format(finalValue);
             currency2valid = true;
             System.out.println(finalMessage);
         } else if(currencyType1.equals("dollars") && currencyType2.equals("euros")){
-            //calculation here
-             finalMessage = "You selected to convert from dollars to euros. The conversion of " + currencyType1 + " to " + currencyType2 + " is: " + finalValue;
+             finalValue = 0.9 * value1;
+             finalMessage = "You selected to convert from dollars to euros. The conversion of " + value1 + " " + currencyType1 + " to " + currencyType2 + " is approximately: " + df.format(finalValue);
              currency2valid = true;
              System.out.println(finalMessage);
         } else if(currencyType1.equals("dollars") && currencyType2.equals("pounds")){
-            //calculation here
-             finalMessage = "You selected to convert from dollars to pounds. The conversion of " + currencyType1 + " to " + currencyType2 + " is: " + finalValue;
+             finalValue = 0.7 * value1;
+             finalMessage = "You selected to convert from dollars to pounds. The conversion of " + value1 + " " + currencyType1 + " to " + currencyType2 + " is approximately: " + df.format(finalValue);
              currency2valid = true;
              System.out.println(finalMessage);
         } else if(currencyType1.equals("pounds") && currencyType2.equals("pounds")){
-             type1confirmation = "You selected to convert from pounds to pounds. The conversion of " + currencyType1 + " to " + currencyType2 + " is: " + finalValue;
-             currency2valid = true;
-             System.out.println(finalMessage);
+            finalValue = value1;
+            finalMessage = "You selected to convert from pounds to pounds. The conversion of " + value1 + " " + currencyType1 + " to " + currencyType2 + " is approximately: " + df.format(finalValue);
+            currency2valid = true;
+            System.out.println(finalMessage);
         } else if(currencyType1.equals("pounds") && currencyType2.equals("dollars")){
-             finalMessage = "You selected to convert from pounds to dollars. The conversion of " + currencyType1 + " to " + currencyType2 + " is: " + finalValue;
+             finalValue = 1.3 * value1;
+             finalMessage = "You selected to convert from pounds to dollars. The conversion of " + value1 + " " + currencyType1 + " to " + currencyType2 + " is approximately: " + df.format(finalValue);
              currency2valid = true;
              System.out.println(finalMessage);
         } else if(currencyType1.equals("pounds") && currencyType2.equals("euros")){
-             finalMessage = "You selected to convert from pounds to euros. The conversion of " + currencyType1 + " to " + currencyType2 + " is: " + finalValue;
+             finalValue = 1.17 * value1;
+             finalMessage = "You selected to convert from pounds to euros. The conversion of " + value1 + " " + currencyType1 + " to " + currencyType2 + " is approximately: " + df.format(finalValue);
              currency2valid = true;
              System.out.println(finalMessage);
         } else if(currencyType1.equals("euros") && currencyType2.equals("euros")){
-             finalMessage = "You selected to convert from euros to euros. The conversion of " + currencyType1 + " to " + currencyType2 + " is: " + finalValue;
+             finalValue = value1;
+             finalMessage = "You selected to convert from euros to euros. The conversion of " + value1 + " " + currencyType1 + " to " + currencyType2 + " is approximately: " + df.format(finalValue);
              currency2valid = true;
              System.out.println(finalMessage);
         } else if(currencyType1.equals("euros") && currencyType2.equals("dollars")){
-             finalMessage = "You selected to convert from euros to dollars. The conversion of " + currencyType1 + " to " + currencyType2 + " is: " + finalValue;
+             finalValue = 1.11 * value1;
+             finalMessage = "You selected to convert from euros to dollars. The conversion of " + value1 + " " + currencyType1 + " to " + currencyType2 + " is approximately: " + df.format(finalValue);
              currency2valid = true;
              System.out.println(finalMessage);
         } else if(currencyType1.equals("euros") && currencyType2.equals("pounds")){
-             finalMessage = "You selected to convert from euros to pounds. The conversion of " + currencyType1 + " to " + currencyType2 + " is: " + finalValue;
+             finalValue = 0.86 * value1;
+             finalMessage = "You selected to convert from euros to pounds. The conversion of " + value1 + " " + currencyType1 + " to " + currencyType2 + " is approximately: " + df.format(finalValue);
              currency2valid = true;
              System.out.println(finalMessage);
         }
